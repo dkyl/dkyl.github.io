@@ -7,6 +7,15 @@
 
 	<body>
     <link rel="stylesheet" type="text/css" href="http://ws1.postescanada-canadapost.ca/css/addresscomplete-2.30.min.css" /><script type="text/javascript" src="http://ws1.postescanada-canadapost.ca/js/addresscomplete-2.30.min.js"></script>
+
+    <!-- Changing text search text color/font/size -->
+    <!-- <style type="text/css">
+      .pca .pcatext {
+          font: 15px Verdana;
+          color: #4682b4;
+      }
+    </style> -->
+
     <script type="text/javascript">
       var fields = [
         { element: "street-address", field: "Line1" },
@@ -20,6 +29,51 @@
         key: "CR83-AB76-UA15-JA93"
       },
       control = new pca.Address(fields, options);
+
+
+
+      console.warn('control', control);
+      console.warn('pca', pca);
+      console.warn('addresscomplete', addressComplete);
+
+      <!-- console.warn(pca.messages.en.DIDYOUMEAN); -->
+
+      addressComplete.listen('ready', function() {
+        console.warn('--- ready event ---');
+        addressComplete.disable();          // disable NOT WORKING
+
+        addressComplete.setWidth(300);              // setWidth and Height NOT WORKING
+	      addressComplete.setHeight(300);
+
+        addressComplete.setCountry("France");       // set country NOT WORKING
+      });
+
+      addressComplete.listen('load', function(control) {  // load event does NOT WORK
+        console.warn('--- load event ---');
+       });
+
+
+	    addressComplete.listen('options', function(options) {    // options event NOT WORKING
+          console.warn('--- options event ---');
+          
+          console.warn(options);
+	        options.bar = options.bar || {};
+	        options.bar.showCountry = false;
+	        options.bar.showLogo = true;
+	        options.bar.logoLink = false;
+	    });
+
+
+      control.listen('ready', function () {
+        control.setWidth(300);
+        control.setHeight(300);
+        control.setCountry("France");
+        console.warn(control);
+      });
+
+      control.listen('populate', function (address) {
+          console.warn('address: ', address);
+      });
     </script>
     <!-- <div class="">
         [[ Address Complete ]]<br><br>
