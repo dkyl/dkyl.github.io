@@ -37,14 +37,9 @@
       console.warn('addresscomplete', addressComplete);
 
 
-      addressComplete.listen('ready', function() {
+      control.listen('ready', function() {
         console.warn('--- ready event ---');
-        addressComplete.disable();                  // disable NOT WORKING
-
-        addressComplete.setWidth(300);              // setWidth and Height NOT WORKING
-	      addressComplete.setHeight(300);
-
-        addressComplete.setCountry("France");       // set country NOT WORKING
+        control.setCountry("France");
       });
 
       addressComplete.listen('load', function(control) {  // load event does NOT WORK
@@ -52,7 +47,7 @@
        });
 
 
-	    addressComplete.listen('options', function(options) {    // options event NOT WORKING
+	    control.listen('options', function(options) {    // options event NOT WORKING
           console.warn('--- options event ---');
 
           console.warn(options);
